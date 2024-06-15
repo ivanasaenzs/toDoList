@@ -1,9 +1,26 @@
+import { useState } from "react";
+
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
 
 import BasicTextFields from "./components/AddTask";
 import { TaskList } from "./components/TaskList";
 
+import { v4 as uuidv4 } from "uuid";
+
 function App() {
+  const [tasks, setTasks] = useState([]);
+
+  const addTask = (task) => {
+    const newTask = {
+      completed: false,
+      description: task,
+      id: uuidv4(),
+    };
+    setTasks([...tasks, newTask]);
+  };
+
+  console.log(tasks);
+
   return (
     <>
       <CssBaseline />
@@ -29,10 +46,10 @@ function App() {
           To-Do List
         </Typography>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <BasicTextFields />
+          <BasicTextFields addTask={addTask} />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <TaskList />
+          <TaskList tasks={tasks} />
         </Box>
       </Container>
     </>

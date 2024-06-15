@@ -2,7 +2,10 @@ import * as React from "react";
 import { MenuItem, FormHelperText, FormControl, Select } from "@mui/material";
 
 export default function SelectLabels() {
-  const handleChange = () => {
+  const [typeTask, setTypeTask] = React.useState("");
+
+  const handleChange = (e) => {
+    setTypeTask(e.target.value);
     console.log("Select option changed!!");
   };
 
@@ -24,6 +27,7 @@ export default function SelectLabels() {
       }}
     >
       <Select
+        value={typeTask}
         onChange={handleChange}
         displayEmpty
         inputProps={{ "aria-label": "Choose task" }}

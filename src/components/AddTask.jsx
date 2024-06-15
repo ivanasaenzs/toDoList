@@ -1,15 +1,19 @@
 import * as React from "react";
+import { useState } from "react";
 import { Box, Button, Container, TextField } from "@mui/material";
 
 import SelectLabels from "./Select";
 
 import { IoAddCircle } from "react-icons/io5";
 
-export default function BasicTextFields() {
+export default function BasicTextFields({ addTask }) {
+  const [taskInInput, setTaskInInput] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Input text is changing!: ", e.target.value);
+    addTask(taskInInput);
+    setTaskInInput("");
   };
 
   return (
@@ -24,7 +28,11 @@ export default function BasicTextFields() {
         <TextField
           id="outlined-basic"
           variant="outlined"
-          onChange={handleSubmit}
+          value={taskInInput}
+          onChange={(e) => {
+            console.log("Your text input is changing: ", e.target.value),
+              setTaskInInput(e.target.value);
+          }}
           sx={{
             backgroundColor: "#fff",
             width: "450px",
