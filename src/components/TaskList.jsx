@@ -1,10 +1,9 @@
 import { Box } from "@mui/material";
-
 import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 
-export const TaskList = () => {
+export const TaskList = ({ tasks }) => {
   return (
     <Box
       className="todo__container"
@@ -13,72 +12,97 @@ export const TaskList = () => {
         maxWidth: "450px",
         margin: "auto",
         marginTop: "40px",
-        backgroundColor: "#fff",
+        backgroundColor: "lightpink",
         overflowX: "hidden",
       }}
     >
       <ul
         className="todo__list"
         style={{
-          display: "flex",
           width: "100%",
-          alignItems: "center",
           padding: 0,
           margin: 0,
           listStyle: "none",
         }}
       >
-        <li
-          id="todo__item"
-          style={{ flex: 1, marginLeft: "6px", listStyle: "none" }}
-        >
-          To-Do item hardcodeado
-        </li>
-        <Box
-          sx={{
-            display: "flex",
-            flex: 1,
-            justifyContent: "flex-end",
-            height: "50px",
-          }}
-        >
-          <button
-            id="complete-btn"
+        {tasks.map((task) => (
+          <li
+            key={task.id}
             style={{
-              backgroundColor: "green",
-              padding: "18px",
-              cursor: "pointer",
-              border: "none",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              marginBottom: "8px",
+              padding: "8px",
+              backgroundColor: "#fff",
+              borderRadius: "4px",
+              opacity: task.completed ? "0.5" : "1",
+              textDecoration: task.completed ? "line-through" : "none",
             }}
-            onClick={() => console.log("Task has been completed button!")}
           >
-            <MdDoneOutline size={18} />
-          </button>
-          <button
-            id="trash-btn"
-            style={{
-              backgroundColor: "orange",
-              padding: "18px",
-              cursor: "pointer",
-              border: "none",
-            }}
-            onClick={() => console.log("DELETE TASK button clicked!")}
-          >
-            <GoTrash size={18} />
-          </button>
-          <button
-            id="edit-btn"
-            style={{
-              backgroundColor: "lightblue",
-              padding: "18px",
-              cursor: "pointer",
-              border: "none",
-            }}
-            onClick={() => console.log("EDIT TASK button clicked!")}
-          >
-            <FaRegEdit size={18} />
-          </button>
-        </Box>
+            <span>{task.description}</span>
+            <Box>
+              <button
+                id={`complete-btn-${task.id}`}
+                title={
+                  task.completed
+                    ? "Not done? Click again to un-complete task"
+                    : "Click here if you completed your task!"
+                }
+                style={{
+                  backgroundColor: "green",
+                  padding: "8px",
+                  marginRight: "3px",
+                  cursor: "pointer",
+                  border: "none",
+                  borderRadius: "4px",
+                }}
+                onClick={() => {
+                  console.log(
+                    `Task ${task.description} has been completed button!`
+                  );
+                }}
+              >
+                <MdDoneOutline size={18} />
+              </button>
+              <button
+                id={`trash-btn-${task.id}`}
+                title="Want to delete the task? Click here!"
+                style={{
+                  backgroundColor: "orange",
+                  padding: "8px",
+                  marginRight: "3px",
+                  cursor: "pointer",
+                  border: "none",
+                  borderRadius: "4px",
+                }}
+                onClick={() => {
+                  console.log(
+                    `DELETE TASK ${task.description} button clicked!`
+                  );
+                }}
+              >
+                <GoTrash size={18} />
+              </button>
+              <button
+                id={`edit-btn-${task.id}`}
+                title="Let's edit this thing"
+                style={{
+                  backgroundColor: "lightblue",
+                  padding: "8px",
+                  cursor: "pointer",
+                  border: "none",
+                  borderRadius: "4px",
+                }}
+                onClick={() =>
+                  console.log(`EDIT TASK ${task.description} button clicked!`)
+                }
+              >
+                <FaRegEdit size={18} />
+              </button>
+            </Box>
+          </li>
+        ))}
       </ul>
     </Box>
   );
