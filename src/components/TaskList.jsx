@@ -3,7 +3,7 @@ import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 
-export const TaskList = ({ tasks }) => {
+export const TaskList = ({ tasks, completeTask }) => {
   return (
     <Box
       className="todo__container"
@@ -58,6 +58,7 @@ export const TaskList = ({ tasks }) => {
                   borderRadius: "4px",
                 }}
                 onClick={() => {
+                  completeTask(task.id);
                   console.log(
                     `Task ${task.description} has been completed button!`
                   );

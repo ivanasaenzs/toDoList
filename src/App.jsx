@@ -21,6 +21,13 @@ function App() {
 
   console.log(tasks);
 
+  const completeTask = (taskId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+  };
+
   return (
     <>
       <CssBaseline />
@@ -49,7 +56,7 @@ function App() {
           <BasicTextFields addTask={addTask} />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} completeTask={completeTask} />
         </Box>
       </Container>
     </>
