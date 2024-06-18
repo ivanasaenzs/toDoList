@@ -1,12 +1,10 @@
 import { useState } from "react";
 
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
-
 import BasicTextFields from "./components/AddTask";
 import { TaskList } from "./components/TaskList";
 
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { getTasks, setTasksArray } from "./utils/localStorage";
-
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -18,6 +16,9 @@ function App() {
       description: task,
       id: uuidv4(),
     };
+    console.log("Task: ", newTask.description);
+    console.log("Completed:  ", newTask.completed);
+    console.log("Task ID: ", newTask.id);
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
     setTasksArray(updatedTasks);
@@ -29,6 +30,12 @@ function App() {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
+    setTasks(updatedTasks);
+    setTasksArray(updatedTasks);
+  };
+
+  const deleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
     setTasksArray(updatedTasks);
   };
@@ -61,7 +68,11 @@ function App() {
           <BasicTextFields addTask={addTask} />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <TaskList tasks={tasks} completeTask={completeTask} />
+          <TaskList
+            tasks={tasks}
+            completeTask={completeTask}
+            deleteTask={deleteTask}
+          />
         </Box>
       </Container>
     </>

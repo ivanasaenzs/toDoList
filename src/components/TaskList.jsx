@@ -1,9 +1,33 @@
+import { useState } from "react";
+
+import BasicModal from "./DeleteModal";
 import { Box } from "@mui/material";
+
 import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 
-export const TaskList = ({ tasks, completeTask }) => {
+export const TaskList = ({ tasks, completeTask, deleteTask }) => {
+  // Functions that handle the opening and closing of the modal 
+  const [isOpen, setIsOpen] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
+
+  const handleOpen = (taskId) => {
+    setTaskToDelete(taskId);
+    setIsOpen(true);
+  };
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setTaskToDelete(null);
+  };
+
+  // Function that does the actual deletion by calling the function to delete task and to close the modal
+  const handleDelete = () => {
+    deleteTask(taskToDelete);
+    handleClose();
+  };
+
   return (
     <Box
       className="todo__container"
@@ -77,11 +101,7 @@ export const TaskList = ({ tasks, completeTask }) => {
                   border: "none",
                   borderRadius: "4px",
                 }}
-                onClick={() => {
-                  console.log(
-                    `DELETE TASK ${task.description} button clicked!`
-                  );
-                }}
+                onClick={() => handleOpen(task.id)}
               >
                 <GoTrash size={18} />
               </button>
@@ -105,6 +125,13 @@ export const TaskList = ({ tasks, completeTask }) => {
           </li>
         ))}
       </ul>
+
+      {/* Modal component that handles the actual deletion */}
+      <BasicModal
+        isOpen={isOpen}
+        handleDelete={handleDelete}
+        handleClose={handleClose}
+      ></BasicModal>
     </Box>
   );
 };
