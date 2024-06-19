@@ -4,7 +4,7 @@ import BasicTextFields from "./components/AddTask";
 import { TaskList } from "./components/TaskList";
 
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
-import { getTasks, setTasksArray } from "./utils/localStorage";
+import { getTasks, updateLocalStorage } from "./utils/localStorage";
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -21,7 +21,7 @@ function App() {
     console.log("Task ID: ", newTask.id);
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
-    setTasksArray(updatedTasks);
+    updateLocalStorage(updatedTasks);
   };
 
   console.log(tasks);
@@ -31,13 +31,13 @@ function App() {
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
     setTasks(updatedTasks);
-    setTasksArray(updatedTasks);
+    updateLocalStorage(updatedTasks);
   };
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
     setTasks(updatedTasks);
-    setTasksArray(updatedTasks);
+    updateLocalStorage(updatedTasks);
   };
 
   return (
@@ -72,6 +72,7 @@ function App() {
             tasks={tasks}
             completeTask={completeTask}
             deleteTask={deleteTask}
+            setTasks={setTasks}
           />
         </Box>
       </Container>
