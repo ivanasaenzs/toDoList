@@ -8,13 +8,7 @@ import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 
-export const TaskList = ({
-  completeTask,
-  deleteTask,
-  tasks,
-  setTasks,
-  updateLocalStorage,
-}) => {
+export const TaskList = ({ completeTask, deleteTask, tasks, setTasks }) => {
   // Functions that handle the opening and closing of the modal and the edit button
   const [isOpen, setIsOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
@@ -84,7 +78,6 @@ export const TaskList = ({
                 tasks={tasks}
                 setTaskToEdit={setTaskToEdit}
                 setTasks={setTasks}
-                updateLocalStorage={updateLocalStorage}
               />
             ) : (
               <span>{task.description}</span>
