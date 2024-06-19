@@ -5,10 +5,12 @@ import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import BasicTextFields from "./components/AddTask";
 import { TaskList } from "./components/TaskList";
 
+import { getTasks, setTasksArray } from "./utils/localStorage";
+
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
-  const [tasks, setTasks] = useState([]);
+  const [tasks, setTasks] = useState(getTasks() || []);
 
   const addTask = (task) => {
     const newTask = {
@@ -16,7 +18,19 @@ function App() {
       description: task,
       id: uuidv4(),
     };
-    setTasks([...tasks, newTask]);
+    const updatedTasks = [...tasks, newTask];
+    setTasks(updatedTasks);
+    setTasksArray(updatedTasks);
+  };
+
+  console.log(tasks);
+
+  const completeTask = (taskId) => {
+    const updatedTasks = tasks.map((task) =>
+      task.id === taskId ? { ...task, completed: !task.completed } : task
+    );
+    setTasks(updatedTasks);
+    setTasksArray(updatedTasks);
   };
 
   return (
@@ -47,7 +61,7 @@ function App() {
           <BasicTextFields addTask={addTask} />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <TaskList tasks={tasks} />
+          <TaskList tasks={tasks} completeTask={completeTask} />
         </Box>
       </Container>
     </>
