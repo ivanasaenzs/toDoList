@@ -1,5 +1,6 @@
 import { useState } from "react";
 
+import { EditTask } from "./EditTask";
 import BasicModal from "./DeleteModal";
 import { Box } from "@mui/material";
 
@@ -7,10 +8,17 @@ import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
 
-export const TaskList = ({ tasks, completeTask, deleteTask }) => {
-  // Functions that handle the opening and closing of the modal 
+export const TaskList = ({
+  completeTask,
+  deleteTask,
+  tasks,
+  setTasks,
+  updateLocalStorage,
+}) => {
+  // Functions that handle the opening and closing of the modal and the edit button
   const [isOpen, setIsOpen] = useState(false);
   const [taskToDelete, setTaskToDelete] = useState(null);
+  const [taskToEdit, setTaskToEdit] = useState(null);
 
   const handleOpen = (taskId) => {
     setTaskToDelete(taskId);
@@ -26,6 +34,11 @@ export const TaskList = ({ tasks, completeTask, deleteTask }) => {
   const handleDelete = () => {
     deleteTask(taskToDelete);
     handleClose();
+  };
+
+  // Handles the edit button of every task
+  const handleEditButton = (taskId) => {
+    setTaskToEdit(taskId);
   };
 
   return (
@@ -64,64 +77,81 @@ export const TaskList = ({ tasks, completeTask, deleteTask }) => {
               textDecoration: task.completed ? "line-through" : "none",
             }}
           >
-            <span>{task.description}</span>
-            <Box>
-              <button
-                id={`complete-btn-${task.id}`}
-                title={
-                  task.completed
-                    ? "Not done? Click again to un-complete task"
-                    : "Click here if you completed your task!"
-                }
-                style={{
-                  backgroundColor: "green",
-                  padding: "8px",
-                  marginRight: "3px",
-                  cursor: "pointer",
-                  border: "none",
-                  borderRadius: "4px",
-                }}
-                onClick={() => {
-                  completeTask(task.id);
-                  console.log(
-                    `Task ${task.description} has been completed button!`
-                  );
-                }}
-              >
-                <MdDoneOutline size={18} />
-              </button>
-              <button
-                id={`trash-btn-${task.id}`}
-                title="Want to delete the task? Click here!"
-                style={{
-                  backgroundColor: "orange",
-                  padding: "8px",
-                  marginRight: "3px",
-                  cursor: "pointer",
-                  border: "none",
-                  borderRadius: "4px",
-                }}
-                onClick={() => handleOpen(task.id)}
-              >
-                <GoTrash size={18} />
-              </button>
-              <button
-                id={`edit-btn-${task.id}`}
-                title="Let's edit this thing"
-                style={{
-                  backgroundColor: "lightblue",
-                  padding: "8px",
-                  cursor: "pointer",
-                  border: "none",
-                  borderRadius: "4px",
-                }}
-                onClick={() =>
-                  console.log(`EDIT TASK ${task.description} button clicked!`)
-                }
-              >
-                <FaRegEdit size={18} />
-              </button>
-            </Box>
+            {taskToEdit === task.id ? (
+              <EditTask
+                description={task.description}
+                id={task.id}
+                tasks={tasks}
+                setTaskToEdit={setTaskToEdit}
+                setTasks={setTasks}
+                updateLocalStorage={updateLocalStorage}
+              />
+            ) : (
+              <span>{task.description}</span>
+            )}
+
+            {taskToEdit !== task.id && (
+              <Box>
+                <button
+                  id={`complete-btn-${task.id}`}
+                  title={
+                    task.completed
+                      ? "Not done? Click again to un-complete task"
+                      : "Click here if you completed your task!"
+                  }
+                  style={{
+                    backgroundColor: "green",
+                    padding: "8px",
+                    marginRight: "3px",
+                    cursor: "pointer",
+                    border: "none",
+                    borderRadius: "4px",
+                  }}
+                  onClick={() => {
+                    completeTask(task.id);
+                    console.log(
+                      `Task ${task.description} has been completed button!`
+                    );
+                  }}
+                >
+                  <MdDoneOutline size={18} />
+                </button>
+                <button
+                  id={`trash-btn-${task.id}`}
+                  title="Want to delete the task? Click here!"
+                  style={{
+                    backgroundColor: "orange",
+                    padding: "8px",
+                    marginRight: "3px",
+                    cursor: "pointer",
+                    border: "none",
+                    borderRadius: "4px",
+                  }}
+                  onClick={() => handleOpen(task.id)}
+                >
+                  <GoTrash size={18} />
+                </button>
+                <button
+                  id={`edit-btn-${task.id}`}
+                  title="Let's edit this thing"
+                  style={{
+                    backgroundColor: "lightblue",
+                    padding: "8px",
+                    cursor: "pointer",
+                    border: "none",
+                    borderRadius: "4px",
+                  }}
+                  onClick={() => {
+                    handleEditButton(task.id);
+                    console.log(
+                      `EDIT TASK ${task.description} button clicked!`
+                    );
+                  }}
+                >
+                  <FaRegEdit size={18} />
+                </button>
+              </Box>
+            )}
           </li>
         ))}
       </ul>
