@@ -6,7 +6,6 @@ export default function SelectLabels() {
 
   const handleChange = (e) => {
     setTypeTask(e.target.value);
-    console.log("Select option changed!!");
   };
 
   return (

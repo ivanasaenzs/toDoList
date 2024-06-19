@@ -30,8 +30,7 @@ export default function BasicTextFields({ addTask }) {
           variant="outlined"
           value={taskInInput}
           onChange={(e) => {
-            console.log("Your text input is changing: ", e.target.value),
-              setTaskInInput(e.target.value);
+            setTaskInInput(e.target.value);
           }}
           sx={{
             backgroundColor: "#fff",

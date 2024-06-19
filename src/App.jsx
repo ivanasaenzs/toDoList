@@ -19,8 +19,6 @@ function App() {
     setTasks([...tasks, newTask]);
   };
 
-  console.log(tasks);
-
   return (
     <>
       <CssBaseline />

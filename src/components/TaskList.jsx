@@ -1,4 +1,5 @@
 import { Box } from "@mui/material";
+
 import { MdDoneOutline } from "react-icons/md";
 import { FaRegEdit } from "react-icons/fa";
 import { GoTrash } from "react-icons/go";
@@ -57,11 +58,7 @@ export const TaskList = ({ tasks }) => {
                   border: "none",
                   borderRadius: "4px",
                 }}
-                onClick={() => {
-                  console.log(
-                    `Task ${task.description} has been completed button!`
-                  );
-                }}
+                onClick
               >
                 <MdDoneOutline size={18} />
               </button>
@@ -76,11 +73,7 @@ export const TaskList = ({ tasks }) => {
                   border: "none",
                   borderRadius: "4px",
                 }}
-                onClick={() => {
-                  console.log(
-                    `DELETE TASK ${task.description} button clicked!`
-                  );
-                }}
+                onClick
               >
                 <GoTrash size={18} />
               </button>
@@ -94,9 +87,7 @@ export const TaskList = ({ tasks }) => {
                   border: "none",
                   borderRadius: "4px",
                 }}
-                onClick={() =>
-                  console.log(`EDIT TASK ${task.description} button clicked!`)
-                }
+                onClick
               >
                 <FaRegEdit size={18} />
               </button>
