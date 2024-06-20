@@ -9,6 +9,7 @@ import { v4 as uuidv4 } from "uuid";
 
 function App() {
   const [tasks, setTasks] = useState(getTasks() || []);
+  const [filteredTasks, setFilteredTasks] = useState(tasks);
 
   const addTask = (task) => {
     const newTask = {
@@ -22,6 +23,7 @@ function App() {
     const updatedTasks = [...tasks, newTask];
     setTasks(updatedTasks);
     updateLocalStorage(updatedTasks);
+    setFilteredTasks(updatedTasks);
   };
 
   console.log(tasks);
@@ -65,14 +67,18 @@ function App() {
           To-Do List
         </Typography>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
-          <BasicTextFields addTask={addTask} />
+          <BasicTextFields
+            addTask={addTask}
+            tasks={tasks}
+            setFilteredTasks={setFilteredTasks}
+          />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
           <TaskList
-            tasks={tasks}
+            tasks={filteredTasks}
+            setTasks={setTasks}
             completeTask={completeTask}
             deleteTask={deleteTask}
-            setTasks={setTasks}
           />
         </Box>
       </Container>

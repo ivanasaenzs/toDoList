@@ -6,7 +6,7 @@ import SelectLabels from "./Select";
 
 import { IoAddCircle } from "react-icons/io5";
 
-export default function BasicTextFields({ addTask }) {
+export default function BasicTextFields({ addTask, tasks, setFilteredTasks }) {
   const [taskInInput, setTaskInInput] = useState("");
 
   const handleSubmit = (e) => {
@@ -61,7 +61,7 @@ export default function BasicTextFields({ addTask }) {
             ),
           }}
         />
-        <SelectLabels />
+        <SelectLabels tasks={tasks} setFilteredTasks={setFilteredTasks} />
       </Box>
     </Container>
   );

@@ -1,11 +1,25 @@
 import * as React from "react";
 import { MenuItem, FormHelperText, FormControl, Select } from "@mui/material";
 
-export default function SelectLabels() {
-  const [typeTask, setTypeTask] = React.useState("");
+export default function SelectLabels({ tasks, setFilteredTasks }) {
+  const [typeTask, setTypeTask] = React.useState("all");
 
-  const handleChange = (e) => {
-    setTypeTask(e.target.value);
+  const handleSelectChange = (e) => {
+    const selectedOption = e.target.value;
+    setTypeTask(selectedOption);
+    console.log(selectedOption);
+
+    let filteredTasks = [];
+
+    if (selectedOption === "completed") {
+      filteredTasks = tasks.filter((task) => task.completed);
+    } else if (selectedOption === "uncompleted") {
+      filteredTasks = tasks.filter((task) => !task.completed);
+    } else {
+      filteredTasks = tasks;
+    }
+
+    setFilteredTasks(filteredTasks);
   };
 
   return (
@@ -27,8 +41,7 @@ export default function SelectLabels() {
     >
       <Select
         value={typeTask}
-        onChange={handleChange}
-        displayEmpty
+        onChange={handleSelectChange}
         inputProps={{ "aria-label": "Choose task" }}
         sx={{
           width: "150px",
