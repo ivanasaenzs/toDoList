@@ -3,8 +3,10 @@ import { useState } from "react";
 import BasicTextFields from "./components/AddTask";
 import { TaskList } from "./components/TaskList";
 
-import { Box, Container, CssBaseline, Typography } from "@mui/material";
 import { getTasks, updateLocalStorage } from "./utils/localStorage";
+
+import { Box, Container, CssBaseline, Typography } from "@mui/material";
+
 import { v4 as uuidv4 } from "uuid";
 
 function App() {
@@ -21,8 +23,8 @@ function App() {
     console.log("Completed:  ", newTask.completed);
     console.log("Task ID: ", newTask.id);
     const updatedTasks = [...tasks, newTask];
-    setTasks(updatedTasks);
     updateLocalStorage(updatedTasks);
+    setTasks(updatedTasks);
     setFilteredTasks(updatedTasks);
   };
 
@@ -32,14 +34,16 @@ function App() {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
-    setTasks(updatedTasks);
     updateLocalStorage(updatedTasks);
+    setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
   };
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
-    setTasks(updatedTasks);
     updateLocalStorage(updatedTasks);
+    setTasks(updatedTasks);
+    setFilteredTasks(updatedTasks);
   };
 
   return (
@@ -69,16 +73,17 @@ function App() {
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
           <BasicTextFields
             addTask={addTask}
-            tasks={tasks}
             setFilteredTasks={setFilteredTasks}
+            tasks={tasks}
           />
         </Box>
         <Box sx={{ width: "100%", maxWidth: "600px", marginTop: "16px" }}>
           <TaskList
-            tasks={filteredTasks}
-            setTasks={setTasks}
             completeTask={completeTask}
             deleteTask={deleteTask}
+            setTasks={setTasks}
+            setFilteredTasks={setFilteredTasks}
+            tasks={filteredTasks}
           />
         </Box>
       </Container>

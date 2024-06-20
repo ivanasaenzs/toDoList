@@ -9,6 +9,7 @@ export const EditTask = ({
   tasks,
   setTasks,
   setTaskToEdit,
+  setFilteredTasks,
 }) => {
   console.log(id);
 
@@ -34,6 +35,7 @@ export const EditTask = ({
     });
     console.log("Updated Tasks Array: ", editedArray);
     setTasks(editedArray);
+    setFilteredTasks(editedArray);
     updateLocalStorage(editedArray);
     handleCancelButton();
   };
