@@ -19,21 +19,18 @@ function App() {
       description: task,
       id: uuidv4(),
     };
-    console.log("Task: ", newTask.description);
-    console.log("Completed:  ", newTask.completed);
-    console.log("Task ID: ", newTask.id);
+
     const updatedTasks = [...tasks, newTask];
     updateLocalStorage(updatedTasks);
     setTasks(updatedTasks);
     setFilteredTasks(updatedTasks);
   };
 
-  console.log(tasks);
-
   const completeTask = (taskId) => {
     const updatedTasks = tasks.map((task) =>
       task.id === taskId ? { ...task, completed: !task.completed } : task
     );
+
     updateLocalStorage(updatedTasks);
     setTasks(updatedTasks);
     setFilteredTasks(updatedTasks);
@@ -41,6 +38,7 @@ function App() {
 
   const deleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
+
     updateLocalStorage(updatedTasks);
     setTasks(updatedTasks);
     setFilteredTasks(updatedTasks);

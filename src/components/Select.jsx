@@ -7,7 +7,6 @@ export default function SelectLabels({ tasks, setFilteredTasks }) {
   const handleSelectChange = (e) => {
     const selectedOption = e.target.value;
     setTypeTask(selectedOption);
-    console.log(selectedOption);
 
     let filteredTasks = [];
 

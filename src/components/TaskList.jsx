@@ -109,9 +109,6 @@ export const TaskList = ({
                   }}
                   onClick={() => {
                     completeTask(task.id);
-                    console.log(
-                      `Task ${task.description} has been completed button!`
-                    );
                   }}
                 >
                   <MdDoneOutline size={18} />
@@ -143,9 +140,6 @@ export const TaskList = ({
                   }}
                   onClick={() => {
                     handleEditButton(task.id);
-                    console.log(
-                      `EDIT TASK ${task.description} button clicked!`
-                    );
                   }}
                 >
                   <FaRegEdit size={18} />

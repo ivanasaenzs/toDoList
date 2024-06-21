@@ -11,8 +11,6 @@ export const EditTask = ({
   setTaskToEdit,
   setFilteredTasks,
 }) => {
-  console.log(id);
-
   // Cancel edit by setting the task to null
   const handleCancelButton = () => {
     setTaskToEdit(null);
@@ -21,7 +19,6 @@ export const EditTask = ({
   // Handles the actual editing of the task
   const handleEditTask = (e) => {
     e.preventDefault();
-    console.log(e.target.taskDescription.value);
 
     const editedArray = tasks.map((task) => {
       if (task.id === id) {
@@ -33,7 +30,6 @@ export const EditTask = ({
         return task;
       }
     });
-    console.log("Updated Tasks Array: ", editedArray);
     setTasks(editedArray);
     setFilteredTasks(editedArray);
     updateLocalStorage(editedArray);
