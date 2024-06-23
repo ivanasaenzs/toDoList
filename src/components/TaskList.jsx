@@ -99,7 +99,7 @@ export const TaskList = ({
                       : "Click here if you completed your task!"
                   }
                   style={{
-                    backgroundColor: "green",
+                    backgroundColor: "#55a630",
                     padding: "8px",
                     marginRight: "3px",
                     cursor: "pointer",
@@ -116,7 +116,7 @@ export const TaskList = ({
                   id={`trash-btn-${task.id}`}
                   title="Want to delete the task? Click here!"
                   style={{
-                    backgroundColor: "orange",
+                    backgroundColor: "#c22b35",
                     padding: "8px",
                     marginRight: "3px",
                     cursor: "pointer",
@@ -131,7 +131,7 @@ export const TaskList = ({
                   id={`edit-btn-${task.id}`}
                   title="Let's edit this thing"
                   style={{
-                    backgroundColor: "lightblue",
+                    backgroundColor: "#0cb1b7",
                     padding: "8px",
                     cursor: "pointer",
                     border: "none",

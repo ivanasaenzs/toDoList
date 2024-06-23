@@ -9,6 +9,7 @@ const style = {
   width: 400,
   bgcolor: "background.paper",
   border: "2px solid #000",
+  borderRadius: "5px",
   boxShadow: 24,
   p: 4,
 };
@@ -23,14 +24,45 @@ export default function BasicModal({ isOpen, handleClose, handleDelete }) {
         aria-describedby="modal-modal-description"
       >
         <Box sx={style}>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
+          <Typography
+            id="modal-modal-title"
+            variant="h6"
+            component="h2"
+            sx={{ textAlign: "center" }}
+          >
             Confirm Deletion
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Typography
+            id="modal-modal-description"
+            sx={{ mt: 2, textAlign: "center" }}
+          >
             Are you sure you want to delete this task?
           </Typography>
-          <Button onClick={handleDelete}>Delete</Button>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Box sx={{ marginTop: 3, textAlign: "center" }}>
+            <Button
+              onClick={handleDelete}
+              sx={{
+                marginRight: "5px",
+                color: "#000",
+                backgroundColor: "#c22b35",
+                border: "2px solid #000",
+                borderRadius: "5px",
+              }}
+            >
+              Delete
+            </Button>
+            <Button
+              onClick={handleClose}
+              sx={{
+                color: "#000",
+                backgroundColor: "#c22b35",
+                border: "2px solid #000",
+                borderRadius: "5px",
+              }}
+            >
+              Cancel
+            </Button>
+          </Box>
         </Box>
       </Modal>
     </div>

@@ -61,7 +61,7 @@ export default function BasicTextFields({ addTask, tasks, setFilteredTasks }) {
                   justifyContent: "center",
                 }}
               >
-                <IoAddCircle size={35} style={{ color: "orange" }} />
+                <IoAddCircle size={35} style={{ color: "#fe763a" }} />
               </Button>
             ),
           }}
