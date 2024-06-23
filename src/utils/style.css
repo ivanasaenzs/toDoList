@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+NG+Modern:wght@100..400&family=Wix+Madefor+Text:ital,wght@0,400..800;1,400..800&display=swap");
 
 body {
-  background:url("./background-image.png") repeat fixed;
+  background: url("./background-image.png") repeat fixed;
 }

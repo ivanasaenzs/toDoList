@@ -28,13 +28,19 @@ export default function BasicModal({ isOpen, handleClose, handleDelete }) {
             id="modal-modal-title"
             variant="h6"
             component="h2"
-            sx={{ textAlign: "center" }}
+            sx={{
+              fontFamily: "Wix Madefor Text, sans-serif",
+              textAlign: "center",
+            }}
           >
-            Confirm Deletion
+            CONFIRM DELETION
           </Typography>
           <Typography
             id="modal-modal-description"
-            sx={{ mt: 2, textAlign: "center" }}
+            sx={{
+              mt: 2,
+              textAlign: "center",
+            }}
           >
             Are you sure you want to delete this task?
           </Typography>
