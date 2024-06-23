@@ -49,7 +49,6 @@ export const TaskList = ({
         maxWidth: "450px",
         margin: "auto",
         marginTop: "40px",
-        backgroundColor: "lightpink",
         overflowX: "hidden",
       }}
     >

@@ -6,6 +6,7 @@ import { TaskList } from "./components/TaskList";
 import { getTasks, updateLocalStorage } from "./utils/localStorage";
 
 import { Box, Container, CssBaseline, Typography } from "@mui/material";
+import "./utils/style.css";
 
 import { v4 as uuidv4 } from "uuid";
 
@@ -51,7 +52,6 @@ function App() {
         sx={{
           minHeight: "100vh",
           minWidth: "100%",
-          backgroundColor: "lightpink",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -64,6 +64,7 @@ function App() {
             marginTop: "150px",
             textAlign: "center",
             fontSize: "2rem",
+            fontFamily: "Playwrite NG Modern, cursive",
           }}
         >
           To-Do List
